@@ -3,7 +3,7 @@
 
 using namespace std;
 
-float FAC(int n);
+double FAC(int n);
 int main() {
     int numero;
     
@@ -14,7 +14,7 @@ int main() {
         return 1; 
     }
     
-    float factorial = FAC(numero);
+    double factorial = FAC(numero);
 
     if (factorial != -1) {
         cout << "\nEl factorial de " << numero << " (" << numero << "!) es: " << factorial << endl;
@@ -23,7 +23,7 @@ int main() {
     return 0;
 }
 
-float FAC(int n) {
+double FAC(int n) {
                                                    // Caso base y manejo de error (factorial solo existe para n >= 0)
     if (n < 0) {
         cerr << "Error: El factorial no está definido para números negativos." << endl;
@@ -33,9 +33,9 @@ float FAC(int n) {
         return 1;
     }
 
-    float resultado = 1;
+    double resultado = 1;
     
-    // Multiplicamos 'resultado' por cada número desde 2 hasta n
+                                               // Multiplicamos 'resultado' por cada número desde 2 hasta n
     for (int i = 2; i <= n; i++) {
         resultado *= i;
     }
