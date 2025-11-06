@@ -1,0 +1,39 @@
+//Construir una función POTEN(y, y), para calcular la potencia x y 
+//de dos números reales cualesquiera.
+
+#include <iostream>
+#include <cmath> 
+
+using namespace std;
+
+float poten(int x, float y);
+
+int main()
+{
+float base;
+float exponente;
+
+cout << "Escriba el numero (base) al cual le quiere calcular la potencia: ";
+if (!(cin >> base)) {
+        cerr << "Error: Radicando no válido." << endl;
+        return 1;
+}
+
+cout << "Escriba el numero (exponente) de la potencia: ";
+if (!(cin >> exponente)) {
+        cerr << "Error: Radicando no válido." << endl;
+        return 1;
+}
+cout << "El cálculo de la potencia de " << base 
+         << " con exponente " << exponente 
+         << " es " << poten(base,exponente) << endl;
+    return 0;
+}
+
+float poten(int x, float y){
+    float resultado;
+    
+    resultado = pow(x,y); 
+    
+    return resultado;
+}
