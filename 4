@@ -1,0 +1,72 @@
+//suma concecutiva con signos alternados e impares, num potencia/denom factorial
+#include<iostream>
+#include<cmath>
+
+using namespace std;
+
+float poten(int x, float y);
+double fac(float z);
+double sum(int cons, float vari);
+
+
+int main()
+{
+int num;
+int base;
+cout<<"Ingrese un numero entero para calcular la suma"<<endl;
+cout<<"(se va calcular la suma hasta el num):";
+if(!(cin>>num)){
+cerr<<"ingrese un num validooo"<<endl;
+return 1;
+}
+
+cout<<"Ingrese el valor de la base de la potencia:";
+if(!(cin>>base)){
+cerr<<"ingrese un num validooo"<<endl;
+return 1;
+}
+cout<<"El resultado de la suma concecutiva con signos alternados e impares es:"<<sum(base, num) << endl
+;
+return 0;
+}
+
+
+float poten(int x, float y){
+float res;
+res= pow(x,y);
+return res;
+}
+
+
+double fac(float z){
+if(z<0){
+cerr<<"el factorial no esta definido para nums negativos"<<endl
+;
+return -1;
+}
+if(z==0||z==1){
+return 1;
+}
+double resfac=1;
+for(int i=2; i<=z; i++){
+resfac*=i;
+}
+return resfac;
+}
+
+
+double sum(int cons, float vari){
+double sum_total = 0;
+int signo=1;
+int impar=1;
+
+for(int j=1; j<=vari; ++j){
+double denominador= fac((float)impar);
+double numerador= poten(cons,(float)impar);
+double termino= numerador/denominador;
+sum_total += (signo*termino);
+signo*= -1; //CAMBIAMOS EL SIGNO para la siguiente iteración (+1 -> -1 -> +1...)
+impar+=2;  //GENERAMOS EL SIGUIENTE NÚMERO IMPAR (1 -> 3 -> 5...)
+}
+return sum_total;
+}
