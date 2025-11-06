@@ -1,0 +1,44 @@
+//2.	Construir una función FAC(n) para calcular el factorial de un entero.
+#include <iostream>
+
+using namespace std;
+
+float FAC(int n);
+int main() {
+    int numero;
+    
+    cout << "Escriba un numero entero no negativo para calcular su factorial: ";
+    
+    if (!(cin >> numero)) {
+        cerr << "Error: Entrada no válida." << endl;
+        return 1; 
+    }
+    
+    float factorial = FAC(numero);
+
+    if (factorial != -1) {
+        cout << "\nEl factorial de " << numero << " (" << numero << "!) es: " << factorial << endl;
+    }
+
+    return 0;
+}
+
+float FAC(int n) {
+                                                   // Caso base y manejo de error (factorial solo existe para n >= 0)
+    if (n < 0) {
+        cerr << "Error: El factorial no está definido para números negativos." << endl;
+        return -1; // Retorna un valor de error
+    }
+    if (n == 0 || n == 1) {
+        return 1;
+    }
+
+    float resultado = 1;
+    
+    // Multiplicamos 'resultado' por cada número desde 2 hasta n
+    for (int i = 2; i <= n; i++) {
+        resultado *= i;
+    }
+    
+    return resultado;
+}
