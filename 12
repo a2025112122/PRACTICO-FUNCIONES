@@ -1,0 +1,50 @@
+#include <iostream>
+
+using namespace std;
+bool abisiest(int año);
+bool validacionfecha(int dia, int mes, int año);
+
+int main() {
+	int d,m,a;
+	cout<<"validando fecha (DIA, MES, ANIO)"<<endl;
+	cout<< "ingrese el dia:";
+	cin>>d;
+	cout<<"ingrese el mes:";
+	cin>>m;
+	cout<<"ingrese el año:";
+	cin>>a;
+	if (validacionfecha(d,m,a)) {
+		cout<<"la fecha ingresada("<<d<<"/"<<m<<"/"<<a<<") es:**VALIDA**."<<endl;
+		if(abisiest(a)) {
+			cout<<"El anio"<<a<<"es BICIESTO."<<endl;
+		} else {
+			cout<<"el anio"<<a<<"NO es BICIESTO"<<endl;
+		}
+	} else {
+		cout<<"la fecha ingresada("<<d<<"/"<<m<<"/"<<a<<")es: **INVALIDA**"<<endl;
+	}
+	return 0;
+}
+
+bool abisiest(int año){
+    return(año%4==0&& año%100!=0);
+}
+    
+bool validacionfecha(int dia, int mes, int año){
+    if(año<1 || mes<1 || mes>12 || dia<1){
+        return false;
+    }
+    int diasmes;
+    if(mes==4 || mes==6 || mes==9 || mes==11){
+        diasmes=30;
+    }else if (mes==2){
+        if (abisiest(año)){
+            diasmes= 29;
+        }else{
+            diasmes=28;
+        }
+    } else {diasmes=31;}
+
+if(dia>diasmes){return false;}
+return true;
+}
