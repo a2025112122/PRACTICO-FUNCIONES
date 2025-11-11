@@ -1,0 +1,86 @@
+//Construir una función que convierta un número real R de hasta 
+//cuatro cifras con dos decimales en su equivalente literal. 
+//Por ejemplo: Bs 1560.50, será convertido a ‘un mil quinientos sesenta 50/100 bolivianos’
+
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+string unidades(int n){
+    string u[]={"","uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"};
+    return u[n];
+}
+
+string decena (int n){
+ string d[]={"","diez","veinte", "treinta", "cuarenta","cincuenta","sesenta","setenta","ochenta","noventa"}; 
+if (n<10) return unidades(n);
+
+if(n>=11 &&n<=15){
+if(n==11)return "once";
+if(n==12)return "doce";
+if(n==13)return "trece";
+if(n==14)return "catorce";
+if(n==15)return "quince";
+}
+int j=n/10; //extrae decena
+int k=n%10;//extrae unidad
+if(k==0) return d[j];
+if(j==1){
+    return "dieci"+unidades(k);}
+if(j==2){
+    return "veinti"+unidades(k);
+}
+return d[j] + "y" + unidades(k);
+}
+
+string centena(int n){
+    string c[]={"","ciento","docientos","trecientos","cuatrocientos", "quinientos","seiscientos","ochocientos","novecientos"};
+  if(n<100)return decena(n);
+  int l=n/100;//extrae centena
+  int r=n%100; //extrae decena
+  if(n==100) return "cien";
+  if(r==0) return c[l];
+  if(l==1){
+      return "ciento"+decena(r);
+  }
+  
+  return c[l] + "" + decena(r);
+}
+
+string miles (int n){
+    if(n<1000){
+        return centena (n);
+    }
+    int m=n /1000; //extrae miles
+    int e=n%1000; //extrae centena
+    
+string parte_miles;
+if(m==1){parte_miles="mil";}
+else {
+    parte_miles =centena(m)+"mil";
+}
+if(e==0){ return parte_miles;}
+return parte_miles + ""+ centena(e);
+}
+
+string numtexto(int n){
+ if(n==0)return "cero";
+ if(n<1000)return centena(n);
+ return miles(n);
+}
+
+string literal (float g){
+    int entero= (int) g;
+    int dec=round((g-entero)*100);
+    string texto=numtexto(entero);
+    return texto + "" + to_string(dec) + "/100 bolivianos";
+}
+
+int main(){
+    float w;
+    cout<<"ingrese un numero:";
+    cin>>w;
+cout<< literal(w)<<endl;
+return 0;
+}
