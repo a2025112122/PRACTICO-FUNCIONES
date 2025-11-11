@@ -1,0 +1,42 @@
+//calcula valor de X y Y, en un sistema de 2ec x 2incognitas. solo cuando tienen sol unicas.
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+bool SISTEMA(float A, float B, float C, float D, float E, float F, float &X,float &Y);
+
+int main(){
+float A, B, C, D, E, F, x_sol, y_sol;
+cout<<"la solucion del sistema de ec: Ax +By +C =0"<<endl;
+cout<<"-------------------------------Dx +Ey +F =0"<<endl;
+cout<<"Ingrese los 6 coeficientes (A,B,C,D,E,F):"<<endl;
+cout<< "para ingresar los datos use espacio para separar cada entrada (ej: 2 3 4 5 6 7)"<<endl;
+if (!(cin >> A >> B >> C >> D >> E >> F)){
+cerr<< "error de entrada. Saliendo..."<<endl;
+return 1;
+}
+if (SISTEMA(A, B, C, D, E, F, x_sol, y_sol)){
+cout << "\nEl sistema tiene una solucion unica:"<<endl;
+cout << "X=" << x_sol << endl;
+cout << "Y="<< y_sol << endl;
+} else {
+cout << "\nel sistema no tiene unica solucion (tiene infinitas sol o no tiene solucion)";
+}
+return 0;
+}
+
+const float EPSILON = 1e-9;
+bool SISTEMA(float A, float B, float C, float D, float E, float F, float &X,float &Y){
+float DELTA = A*E-D*B;
+if (abs(DELTA) < EPSILON){
+Y=NAN;
+X=NAN;
+return false;
+}
+float delta_x = F*B-C*E;
+float delta_y = C*D-A*F;
+
+X= delta_x / DELTA;
+Y= delta_y/ DELTA;
+return true;
+}
